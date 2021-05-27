@@ -3,8 +3,9 @@ import java.util.List;
 
 public class RamblersState extends SearchState {
 
-    private int[][] state;
-
+    RamblersState(int localCost) {
+        this.localCost = localCost;
+    }
     /* goalPredicate checks if a node is a goal node, and returns a boolean for the result.
     I call the getSuccessors method which I have implemented below. If there are no successors, the
     node must be a goal node, which I check with isEmpty().
@@ -18,8 +19,10 @@ public class RamblersState extends SearchState {
      */
     ArrayList<SearchState> getSuccessors(Search searcher) {
         ArrayList<SearchState> successorList = new ArrayList<>();
-        for (SearchNode node : searcher.successorNodes) {
-            successorList.add(node.get_State());
+        if (searcher.successorNodes != null) {
+            for (SearchNode node : searcher.successorNodes) {
+                successorList.add(node.get_State());
+            }
         }
         return successorList;
     }
